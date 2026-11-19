@@ -1,0 +1,31 @@
+/* ==========================================================
+   responsive.css: adapta el diseño a tablets y celulares.
+   Cada bloque @media solo se aplica si la pantalla es más angosta
+   que el valor indicado.
+   ========================================================== */
+
+/* TABLETS (hasta 900px): la ficha pasa a una sola columna */
+@media (max-width: 900px) {
+  .ficha { grid-template-columns: 1fr; }
+  .ficha .poster { max-width: 320px; margin-inline: auto; }
+  .buscador input { width: 190px; }
+}
+
+/* CELULARES (hasta 640px) */
+@media (max-width: 640px) {
+  .grid-peliculas { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .poster span { font-size: 1.05rem; }
+  .logo { font-size: 1.4rem; }
+  .btn-prim, .btn-sec { padding: .4rem .8rem; font-size: .9rem; }
+  /* Los tres botones de menú se reparten el ancho y el desplegable ocupa todo el ancho de la barra */
+  .item-menu { position: static; flex: 1 1 28%; }
+  .btn-menu { width: 100%; justify-content: space-between; }
+  .desplegable { left: 0; right: 0; min-width: 0; }
+  .buscador { flex: 1 1 100%; margin-left: 0; }
+  .buscador input { width: 100%; flex: 1; }
+}
+
+/* Accesibilidad: si la persona pidió menos animaciones en su sistema, las quitamos */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

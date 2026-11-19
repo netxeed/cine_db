@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!-- FICHA DE PELÍCULA. Una sola página sirve para todas: la película se elige
+     con la dirección (pelicula.html?id=3) y peliculas.js dibuja sus datos. -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CineNova | Película</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Rutas con ../ porque esta página está dentro de la carpeta pages/ -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/peliculas.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-pagina="pelicula" data-base="../">
+  <header id="cabecera"></header>
+  <main>
+    <!-- Aquí se inserta la información de la película elegida -->
+    <article id="ficha"></article>
+  </main>
+  <footer class="pie">CineNova es un proyecto de ejemplo: no vende entradas reales.</footer>
+  <script src="../js/peliculas.js"></script>
+  <script src="../js/usuarios.js"></script>
+  <script src="../js/navegacion.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

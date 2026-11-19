@@ -1,0 +1,129 @@
+/* ==========================================================
+   styles.css: estilos BASE (colores, tipografía, cabecera,
+   menús desplegables, botones y formularios de usuario)
+   ========================================================== */
+
+/* Variables: colores y medidas que se reutilizan en todo el sitio.
+   Si cambias un valor aquí, cambia en toda la página. */
+:root {
+  --fondo: #0f0b16;       /* fondo general: negro con un toque violeta */
+  --superficie: #191322;  /* tarjetas, menús y formularios */
+  --borde: #2e2640;
+  --texto: #f2edf8;
+  --suave: #a89fba;       /* texto secundario */
+  --dorado: #e2b24f;      /* color principal de destaque */
+  --violeta: #8b5cf6;     /* color secundario (brillos) */
+  --fuente: "Outfit", system-ui, sans-serif;
+  --fuente-titulo: "Playfair Display", Georgia, serif;
+}
+
+/* Reinicio: quita márgenes por defecto y hace que el ancho incluya el relleno */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--fuente);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;            /* con flex el pie de página queda siempre abajo */
+  flex-direction: column;
+}
+main { flex: 1; width: min(1200px, 100% - 2rem); margin-inline: auto; padding: 2rem 0 3rem; }
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+/* Contorno visible al navegar con teclado */
+:focus-visible { outline: 2px solid var(--dorado); outline-offset: 2px; }
+
+/* ---------- Botones ---------- */
+.btn-prim, .btn-sec {
+  padding: .5rem 1.1rem; border-radius: 999px; border: 1px solid var(--dorado);
+  transition: background .25s, color .25s;
+}
+.btn-prim { background: var(--dorado); color: #1a1208; font-weight: 600; }
+.btn-prim:hover { background: #f0c565; }
+.btn-sec { background: transparent; color: var(--dorado); }
+.btn-sec:hover { background: rgba(226, 178, 79, .15); }
+
+/* ---------- Cabecera ---------- */
+#cabecera {
+  background: #130e1b; border-bottom: 1px solid var(--borde);
+  position: sticky; top: 0; z-index: 20; /* queda fija al hacer scroll */
+}
+/* Fila superior: logo a la izquierda, botones de usuario a la derecha */
+.barra-usuario {
+  display: flex; justify-content: space-between; align-items: center;
+  width: min(1200px, 100% - 2rem); margin-inline: auto; padding: .75rem 0;
+}
+.logo { font-family: var(--fuente-titulo); font-size: 1.7rem; font-weight: 700; color: var(--dorado); }
+.acciones-usuario { display: flex; align-items: center; gap: .6rem; }
+.saludo { color: var(--suave); }
+
+/* Fila inferior: barra de navegación horizontal */
+.barra-nav {
+  position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: .6rem;
+  width: min(1200px, 100% - 2rem); margin-inline: auto; padding: 0 0 .8rem;
+}
+.item-menu { position: relative; } /* el menú se posiciona respecto a este contenedor */
+.btn-menu {
+  display: flex; align-items: center; gap: .5rem; max-width: 100%;
+  background: var(--superficie); border: 1px solid var(--borde); border-radius: 999px;
+  padding: .45rem 1rem; transition: border-color .25s;
+}
+.btn-menu:hover, .item-menu.abierto .btn-menu { border-color: var(--violeta); }
+/* Flechita que gira cuando el menú está abierto */
+.btn-menu::after { content: ""; width: 7px; height: 7px; border: solid var(--suave); border-width: 0 2px 2px 0; transform: rotate(45deg) translateY(-2px); transition: transform .25s; }
+.item-menu.abierto .btn-menu::after { transform: rotate(225deg); }
+/* Texto con la opción elegida (ciudad, cine o género) */
+.etq { color: var(--dorado); font-size: .85rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 11rem; }
+
+/* MENÚ DESPLEGABLE: está oculto (opacity 0 + visibility hidden) y al agregarle
+   la clase "abierto" al contenedor se muestra con una transición suave. */
+.desplegable {
+  position: absolute; top: calc(100% + .5rem); left: 0; min-width: 260px; list-style: none;
+  background: var(--superficie); border: 1px solid var(--borde); border-radius: 14px; padding: .4rem;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .55);
+  opacity: 0; visibility: hidden; transform: translateY(-8px);
+  transition: opacity .25s, transform .25s, visibility .25s;
+}
+.item-menu.abierto .desplegable { opacity: 1; visibility: visible; transform: none; }
+.opcion {
+  display: block; width: 100%; text-align: left; background: none; border: 0;
+  padding: .55rem .8rem; border-radius: 8px; transition: background .2s;
+}
+.opcion:hover { background: rgba(139, 92, 246, .2); }
+.opcion.activa { color: var(--dorado); }
+.opcion small { display: block; color: var(--suave); font-size: .8rem; }
+
+/* Buscador: ocupa el espacio restante a la derecha */
+.buscador { margin-left: auto; display: flex; gap: .4rem; }
+.buscador input {
+  width: 240px; background: var(--superficie); border: 1px solid var(--borde);
+  border-radius: 999px; padding: .45rem 1rem;
+}
+.buscador input:focus { border-color: var(--violeta); outline: none; }
+
+/* ---------- Formularios (ventanas de inicio de sesión y registro) ---------- */
+.modal {
+  margin: auto; width: min(420px, 92vw); padding: 1.75rem; color: var(--texto);
+  background: var(--superficie); border: 1px solid var(--borde); border-radius: 16px;
+}
+.modal[open] { animation: aparecer .25s ease; } /* respuesta a la acción de abrir */
+.modal::backdrop { background: rgba(5, 3, 10, .78); } /* fondo oscurecido */
+.modal h2 { font-family: var(--fuente-titulo); margin-bottom: 1rem; }
+.campo { margin-bottom: .9rem; }
+.campo label { display: block; font-size: .9rem; color: var(--suave); margin-bottom: .25rem; }
+.campo input {
+  width: 100%; background: var(--fondo); border: 1px solid var(--borde);
+  border-radius: 8px; padding: .6rem .8rem;
+}
+.campo input:focus { border-color: var(--violeta); outline: none; }
+.error { color: #ff7a8a; min-height: 1.3rem; font-size: .9rem; margin-bottom: .5rem; }
+.fila-botones { display: flex; gap: .6rem; justify-content: flex-end; }
+.cambiar { margin-top: 1rem; font-size: .9rem; color: var(--suave); }
+.cambiar button { background: none; border: 0; color: var(--dorado); text-decoration: underline; }
+@keyframes aparecer { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Pie de página ---------- */
+.pie { text-align: center; color: var(--suave); font-size: .85rem; padding: 1.5rem 1rem; border-top: 1px solid var(--borde); }

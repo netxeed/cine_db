@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!-- PÁGINA PRINCIPAL de CineNova. Contiene solo la estructura base:
+     la cabecera (usuario + navegación) y las tarjetas se generan con JavaScript. -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <!-- Necesario para que el diseño se adapte a celulares -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CineNova | Cartelera</title>
+  <!-- Tipografías de Google Fonts (si no hay internet se usan las de respaldo definidas en el CSS) -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Hojas de estilo: base, películas y adaptación a pantallas (el orden importa: la última pisa a las anteriores) -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/peliculas.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<!-- data-pagina y data-base le dicen a main.js en qué página está y cómo llegar a las carpetas -->
+<body data-pagina="inicio" data-base="">
+
+  <!-- CABECERA: apartado de usuario + barra de navegación. La construye navegacion.js -->
+  <header id="cabecera"></header>
+
+  <main>
+    <!-- SECCIÓN "EN CARTELERA": main.js dibuja aquí las tarjetas -->
+    <section id="cartelera" aria-labelledby="titulo-cartelera">
+      <div class="encabezado-seccion">
+        <h2 id="titulo-cartelera">En cartelera</h2>
+        <p id="estado-filtros" class="texto-filtro"></p>
+      </div>
+      <div id="grid-cartelera" class="grid-peliculas"></div>
+    </section>
+
+    <!-- SECCIÓN "PRÓXIMOS ESTRENOS": películas que todavía no están disponibles -->
+    <section id="estrenos" aria-labelledby="titulo-estrenos">
+      <div class="encabezado-seccion">
+        <h2 id="titulo-estrenos">Próximos estrenos</h2>
+      </div>
+      <div id="grid-estrenos" class="grid-peliculas"></div>
+    </section>
+  </main>
+
+  <footer class="pie">CineNova es un proyecto de ejemplo: no vende entradas reales.</footer>
+
+  <!-- SCRIPTS: el orden importa. main.js va último porque usa las funciones de los otros -->
+  <script src="js/peliculas.js"></script>
+  <script src="js/usuarios.js"></script>
+  <script src="js/navegacion.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

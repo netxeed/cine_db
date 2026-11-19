@@ -238,6 +238,13 @@ INSERT INTO Roles (nombre_rol, descripcion_rol) VALUES
     ('admin',   'Responsable de programacion: disena y habilita funciones'),
     ('usuario', 'Cliente: consulta la cartelera y compra entradas');
 
+-- Usuarios de demostracion bloqueados: el hash '*' no coincide con ninguna contrasena,
+-- asi que nadie puede iniciar sesion con ellos. Las cuentas reales se crean en la base
+-- local (el administrador con su contrasena propia) y nunca se suben al repositorio.
+INSERT INTO Usuarios (nombre_usuario, correo_usuario, password_hash, ID_Rol) VALUES
+    ('admin',    'admin@cines.com',     '*', 1),
+    ('cliente1', 'cliente1@correo.com', '*', 2);
+
 INSERT INTO Entradas (fecha_venta, precio_cobrado, estado_entrada, fila, numero_butaca, ID_Funcion, ID_Tipo_entrada, ID_Usuario) VALUES
     ('2026-11-19', 6000, 1, 'A', 1, 1, 1, 2),
     ('2026-11-19', 4500, 1, 'A', 2, 1, 2, 2),

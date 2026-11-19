@@ -50,6 +50,7 @@ CREATE TABLE Peliculas (
     ID_Pelicula          INTEGER PRIMARY KEY AUTOINCREMENT,
     titulo               TEXT NOT NULL,
     sinopsis             TEXT,
+    fecha_estreno        TEXT,
     fecha_carga_pelicula TEXT NOT NULL CHECK (date(fecha_carga_pelicula) IS fecha_carga_pelicula),
     duracion             INTEGER NOT NULL CHECK (duracion > 0),  -- minutos
     ID_Clasificacion     INTEGER NOT NULL REFERENCES Clasificaciones(ID_Clasificacion)

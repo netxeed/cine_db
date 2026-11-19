@@ -50,7 +50,7 @@ CREATE TABLE Peliculas (
     ID_Pelicula          INTEGER PRIMARY KEY AUTOINCREMENT,
     titulo               TEXT NOT NULL,
     sinopsis             TEXT,
-    fecha_estreno        TEXT,
+    fecha_estreno        TEXT CHECK (date(fecha_estreno) IS fecha_estreno),
     fecha_carga_pelicula TEXT NOT NULL CHECK (date(fecha_carga_pelicula) IS fecha_carga_pelicula),
     duracion             INTEGER NOT NULL CHECK (duracion > 0),  -- minutos
     ID_Clasificacion     INTEGER NOT NULL REFERENCES Clasificaciones(ID_Clasificacion)
@@ -144,7 +144,7 @@ CREATE TABLE Roles (
 
 CREATE TABLE Usuarios (
     ID_Usuario      INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre_usuario  TEXT NOT NULL UNIQUE COLLATE NOCASE CHECK (length(nombre_usuario) >= 3),
+    nombre_usuario  TEXT NOT NULL CHECK (length(nombre_usuario) >= 3),   -- nombre y apellido pueden repetirse
     correo_usuario  TEXT NOT NULL UNIQUE COLLATE NOCASE CHECK (correo_usuario LIKE '%_@_%._%'),
     password_hash   TEXT NOT NULL,   -- generado con password_hash() de PHP, nunca la contrasena en texto
     estado_usuario  INTEGER NOT NULL DEFAULT 1 CHECK (estado_usuario IN (0, 1)),  -- 1 = activo, 0 = inactivo
